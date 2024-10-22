@@ -1,1 +1,1 @@
-# AKS_Challenge
+# CGI_Challenge

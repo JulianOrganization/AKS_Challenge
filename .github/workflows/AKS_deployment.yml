@@ -1,0 +1,62 @@
+name: Create Azure AKS With Terraform
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  AKS-Cluster-Deployment:
+    runs-on: ubuntu-latest
+    environment: AKS_Testing
+    defaults:
+      run:
+        shell: bash
+        working-directory: AKS
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.1.0
+
+      - name: 'az CLI login'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: false
+          environment: azurecloud
+          allow-no-subscriptions: false
+          audience: api://AzureADTokenExchange
+          auth-type: SERVICE_PRINCIPAL
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+
+      - name: Terraform Output
+        run: terraform output
+
+      #- name: Deploy Application
+      #  run: |
+      #    az aks get-credentials -n "cluster-bursting-jennet" -g "rg-refined-swine"
+      #    kubectl apply -f ./AKSApp/aks-store-quickstart.yaml
+      #    sleep 40
+      #    kubectl get service store-front
+      #    rm -rf ~/.kube
