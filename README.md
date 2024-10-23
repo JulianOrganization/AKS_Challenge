@@ -1,4 +1,4 @@
-# CGI_Challenge
+# AKS_Challenge
 
 ## Task 1: 
 ✅
