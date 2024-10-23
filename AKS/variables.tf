@@ -1,3 +1,4 @@
+# Variablen, die in der Terraform-Konfiguration verwendet werden
 variable "resource_group_location" {
   type        = string
   default     = "northeurope" # Location der Ressourcen festlegen.
