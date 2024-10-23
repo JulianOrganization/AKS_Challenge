@@ -1,3 +1,4 @@
+# Diese Datei legt fest, wie der Webserver bereitgestellt wird und die Verwendung der ConfigMap für den Inhalt.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
