@@ -97,3 +97,66 @@ kubectl get service hello-world-service -o jsonpath='{.status.loadBalancer.ingre
 ```
 
 ## Task3:
+### Bereitstellung unter mehreren Knoten:
+In Cluster gehen, Workloads, Create, YAML Datei, Code einfügen:
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3  # Drei Replikate des NGINX Container werden erstellt.
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+```
+Damit stellt AKS automatisch sicher, dass eine hohe Verfügbarkeit und Ausfallsicherheit gewährleistet wird.
+
+Link:
+```
+https://portal.azure.com/#view/Microsoft_Azure_ContainerService/AksK8ResourceMenuBlade/~/overview-Deployment/aksClusterId/%2Fsubscriptions%2F2fc0173e-cada-4000-82db-566c79d396db%2FresourceGroups%2Frg-knowing-monkey%2Fproviders%2FMicrosoft.ContainerService%2FmanagedClusters%2Fcluster-touched-gorilla/resource~/%7B%22kind%22%3A%22Deployment%22%2C%22metadata%22%3A%7B%22name%22%3A%22nginx-deployment%22%2C%22namespace%22%3A%22default%22%2C%22uid%22%3A%22921187a1-a63c-4f33-90dc-7ccfe61e5aef%22%7D%2C%22spec%22%3A%7B%22selector%22%3A%7B%22matchLabels%22%3A%7B%22app%22%3A%22nginx%22%7D%7D%7D%7D
+```
+
+### Instanzen sollen eine Round-Robin-Verteilung des Datenverkehrs erhalten
+Dies wurde bereits in der service.yaml Datei sichergestell, welche einen LoadBalancer verwendet.
+Dadurch wird der Datenverkehr autoamtisch im Round-Robin-Verfahren auf die verfügbaren Replikas verteilt.
+
+### Container-Instanzen sollen je nach CPU-Last automatisch skalieren
+Cloud-Shell öffnen, hpa.yaml Datei erstellen:
+```
+echo '
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-deployment
+  minReplicas: 1 # Mindestens 1 Repikat
+  maxReplicas: 10 # Maximal 10 Replikate
+  targetCPUUtilizationPercentage: 50
+' > hpa.yaml
+```
+Diese YAML-Datei sorgt dafür, dass die Anzahl der NGINX Replikate automatisch basierend auf der CPU-Last skaliert wird. Min: 1, Max: 10.
+
+hpa.yaml anwenden:
+```
+kubectl apply -f hpa.yaml
+```
+
+hpa.yaml verifizieren:
+```
+kubectl get hpa
+```
