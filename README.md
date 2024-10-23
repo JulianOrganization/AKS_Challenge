@@ -243,6 +243,13 @@ kubectl get ingress
 Für das Aufrufen der Webseite über https fehlen mir noch Berechtigungen als Key Vault User um die Zertifikate in der Key Vault speichern zu können. 😮
 
 ## ▶ Task 5
+### Möglichkeiten, um das sicherzustellen:
+- TLS/SSL Zertifikate stellen sicher, dass der Datenverkehr über HTTPS läuft.
+- Netzwerksicherheitsgruppen (NSGs) tragen dazu bei den Zugriff auf die Ressourcen zu kontrollieren.
+- Firewall-Regeln lassen nur autorisierten Datenverkehr zu.
+- Azure Security Center verwenden, um die kontinuierliche Sicherheitsbewertungen und Empfehlungen einsehen zu können.
+- Azure Policies einsetzen, damit Sicherheitsrichtlinien automatisch durchgesetzt werden.
+- Regelmäßige Sicherheitsupdates und Wartungsarbeiten durchführen.
 
 ## ▶ Task 6
 ### Azure Monitor und Log Analytics
