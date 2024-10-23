@@ -1,3 +1,4 @@
+# Macht den Webserver über eine externe IP-Adresse zugänglich, sodass "Hello World" im Browser angezeigt wird.
 apiVersion: v1
 kind: Service
 metadata:
