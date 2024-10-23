@@ -1,13 +1,22 @@
-# AKS_Challenge
+# 🧙🏻‍♂️ AKS_Challenge
 
-## Task 1: 
+## ▶ Vorbereitungen
+- Repository erstellen
+- Environment secrets anfragen
+- Environment secrets in GitHub hinterlegen
+- Federated credential für den Service Principal einrichten für GitHub Actions
+- Contributor Rolle für die Subscription
+- Key Vault User für die Key Vault
+- Dokumente und Videos über Kuberenetes bzw. AKS studieren (https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-terraform?pivots=development-environment-azure-cli)
+
+## ▶ Task 1: 
 https://github.com/JulianOrganization/AKS_Challenge/actions/runs/11482897829/job/31957062717
 ```
 az aks get-credentials --resource-group rg-knowing-monkey --name cluster-touched-gorilla
 
 kubectl get nodes
 ```
-## Task 2: 
+## ▶ Task 2: 
 ### confimap.yaml erstellen:
 Enthält die Webseite mit der Ausgabe "Hello World" an sich, die der NGINX-Webserver anzeigt.
 ```
@@ -93,8 +102,9 @@ kubectl apply -f service.yaml
 ```
 kubectl get svc hello-world-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
+ℹ Teilweise wurde dieser Task schon automatisiert: https://github.com/JulianOrganization/AKS_Challenge/blob/main/.github/workflows/AKS_deployment.yml#L56
 
-## Task3:
+## ▶ Task3:
 ### Bereitstellung unter mehreren Knoten:
 In Cluster gehen, Workloads, Create, YAML Datei, Code einfügen:
 ```
@@ -159,7 +169,7 @@ hpa.yaml verifizieren:
 kubectl get hpa
 ```
 
-## Task 4
+## ▶ Task 4
 Installation des Ingress-Controller (NGINX) mit Helm in der Cloud Shell:
 ```
 # Hinzufügen des Helm-Repositories
@@ -229,3 +239,37 @@ Ingress-Ressource überprüfen:
 ```
 kubectl get ingress
 ```
+
+Für das Aufrufen der Webseite über https fehlen mir noch Berechtigungen als Key Vault User um die Zertifikate in der Key Vault speichern zu können. 😮
+
+## ▶ Task 5
+
+## ▶ Task 6
+### Azure Monitor und Log Analytics
+- Azure Monitor ermöglicht Metriken und Logs zu sammeln und zu analysieren.
+- Integration des AKS-Cluster mit Azure Monitor, um ihn zu überwachen.
+- Dashboards erstellen, um Echtzeitdaten wie CPU-Auslastung, Speicherverbrauch und Netzwerkaktivität anzuzeigen.
+- Log Analytics nutzen, um Anwendungsprotokolle und Audit-Logs zu sammeln und zu analysieren.
+
+### Alerts und Benachrichtigungen
+- Warnungen einrichten, um benachrichtigt zu werden, wenn bestimmte Schwellenwerte überschritten werden.
+- E-Mail und SMS-Benachrichtigungen, damit man direkt benachrichtigt wird.
+- Automatische Skalierung basierend auf Metriken einrichten, damit die Verfügbarkeit gewährleistet wird.
+
+### Hochverfügbarkeit und Ausfallsicherheit
+- AKS-Knoten über mehrere Regionen bereitstellen. Dadurch wird die Anwendung bei einem Ausfall einer Region weiterhin verfügbar sein.
+
+### Regelmäßige Backups und Disaster Recovery
+- Automatisierte regelmäßige Backups der Daten und Konfigurationen.
+- Disaster Recovery Pläne erstellen für die Wiederherstellung nach einem Ausfall. Dadurch kann die Anwendung schnell wiederhergestellt werden.
+
+### Sicherheit und Compliance
+- Sicherheitsrichtlinien und -kontrollen Implementiere, um die AKS-Lösung zu schützen.
+- Compliance-Überwachung sicherstellen. Dadurch wird die Umgebung auf die Einhaltung gesetzlicher Vorschriften und Industriestandards überwacht.
+
+### Kontinuierliche Optimierung und Wartung
+- Leistungsüberwachung: Überwache die Leistung deiner AKS-Lösung kontinuierlich und optimiere sie bei Bedarf.
+- Regelmäßige Wartungsarbeiten durchführen, damit die Umgebung auf dem neuesten Stand und sicher bleibt.
+
+## ▶ Task 7
+Teilweise angefangen: Deployment des Task 1 erfolgt automatisiert über GitHub Actions
