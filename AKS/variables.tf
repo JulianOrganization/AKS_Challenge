@@ -1,6 +1,6 @@
 variable "resource_group_location" {
   type        = string
-  default     = "westeurope"
+  default     = "eastus" # Need to use eastus for these testing purposes because free tier is only available there
   description = "Location of the resource group."
 }
 
