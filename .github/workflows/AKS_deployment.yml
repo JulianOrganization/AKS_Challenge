@@ -52,6 +52,9 @@ jobs:
 
       - name: Terraform Output
         run: terraform output
+
+      - name: Sleep for resources to be ready
+        run: sleep 120
         
       - name: Configure kubectl
         run: |
