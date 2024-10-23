@@ -1,26 +1,34 @@
-name: Create Azure AKS With Terraform
+# Beschreibung des Workflows
+name: Create Azure AKS with Terraform
 
+# Ermöglicht den Workflow über das GitHub-Interface zu starten.
 on:
   workflow_dispatch:
 
+# Berechtigungen für den Workflow.
 permissions:
   id-token: write
   contents: read
 
+# Startet die Definition der Jobs im Workflow.
 jobs:
+# Name des Jobs, welcher auf Ubuntu läuft und das environment AKS_Testing wird festgelegt, wo die ensprechenden Secrets hier in GitHub hinterlegt sind.
   AKS-Cluster-Deployment:
     runs-on: ubuntu-latest
     environment: AKS_Testing
     defaults:
       run:
         shell: bash
+        # Verzeichnis AKS wird festgelegt.
         working-directory: AKS
 
     steps:
+    # GitHub Actions checkout@v3.1.0 wird verwendet.
       - name: Checkout repository
         uses: actions/checkout@v3.1.0
 
       - name: 'az CLI login'
+      # Authentifiziert sich bei Azure mit den angegebenen Anmeldeinformationen. Siehe auch die Environment secrets hier in den GitHub Settings.
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -32,6 +40,7 @@ jobs:
           audience: api://AzureADTokenExchange
           auth-type: SERVICE_PRINCIPAL
 
+# Terraform Befehle werden ausgeführt.
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
 
@@ -53,6 +62,7 @@ jobs:
       - name: Terraform Output
         run: terraform output
 
+# Work in progress. Automatisierung Task 2.
 #      - name: Sleep for resources to be ready
 #       run: sleep 120
 #        
