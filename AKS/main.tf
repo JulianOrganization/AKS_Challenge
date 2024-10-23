@@ -42,7 +42,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 }
 
-resource "azurerm_kubernetes_cluster_node_pool" "np" {
+/*resource "azurerm_kubernetes_cluster_node_pool" "np" {
   name                = "internal"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s.id
   vm_size             = "Standard_D2s_v5"
@@ -129,4 +129,4 @@ resource "kubernetes_service" "hello_world_service" {
       app = "hello-world"
     }
   }
-}
+}*/
