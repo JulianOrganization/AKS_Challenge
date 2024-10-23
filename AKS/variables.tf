@@ -1,6 +1,6 @@
 variable "resource_group_location" {
   type        = string
-  default     = "germanynorth" # Need to use germanynorth for these testing purposes because free tier is only available there
+  default     = "westeurope"
   description = "Location of the resource group."
 }
 
