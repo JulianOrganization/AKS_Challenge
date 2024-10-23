@@ -52,11 +52,11 @@ jobs:
 
       - name: Terraform Output
         run: terraform output
-
-      #- name: Deploy Application
-      #  run: |
-      #    az aks get-credentials -n "cluster-bursting-jennet" -g "rg-refined-swine"
-      #    kubectl apply -f ./AKSApp/aks-store-quickstart.yaml
-      #    sleep 40
-      #    kubectl get service store-front
-      #    rm -rf ~/.kube
+        
+      - name: Configure kubectl
+        run: |
+          az aks get-credentials --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name myAKSCluster
+          kubectl apply -f configmap.yaml
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+          kubectl get nodes
