@@ -244,39 +244,24 @@ Für das Aufrufen der Webseite über https fehlen mir noch Berechtigungen als Ke
 
 ## ▶ Task 5
 ### Möglichkeiten, um das sicherzustellen:
-- TLS/SSL Zertifikate stellen sicher, dass der Datenverkehr über HTTPS läuft.
-- Netzwerksicherheitsgruppen (NSGs) tragen dazu bei den Zugriff auf die Ressourcen zu kontrollieren.
-- Firewall-Regeln lassen nur autorisierten Datenverkehr zu.
-- Azure Security Center verwenden, um die kontinuierliche Sicherheitsbewertungen und Empfehlungen einsehen zu können.
-- Azure Policies einsetzen, damit Sicherheitsrichtlinien automatisch durchgesetzt werden.
-- Regelmäßige Sicherheitsupdates und Wartungsarbeiten durchführen.
+- **TLS/SSL Zertifikate** stellen sicher, dass der Datenverkehr über HTTPS läuft.
+- **Netzwerksicherheitsgruppen (NSGs)** tragen dazu bei den Zugriff auf die Ressourcen zu kontrollieren.
+- **Firewall-Regeln** lassen nur autorisierten Datenverkehr zu.
+- **Azure Security Center** verwenden, um die kontinuierliche Sicherheitsbewertungen und Empfehlungen einsehen zu können.
+- **Azure Policies** einsetzen, damit Sicherheitsrichtlinien automatisch durchgesetzt werden.
+- **Regelmäßige Sicherheitsupdates** und **Wartungsarbeiten** durchführen.
 
 ## ▶ Task 6
-### Azure Monitor und Log Analytics
-- Azure Monitor ermöglicht Metriken und Logs zu sammeln und zu analysieren.
-- Integration des AKS-Cluster mit Azure Monitor, um ihn zu überwachen.
-- Dashboards erstellen, um Echtzeitdaten wie CPU-Auslastung, Speicherverbrauch und Netzwerkaktivität anzuzeigen.
-- Log Analytics nutzen, um Anwendungsprotokolle und Audit-Logs zu sammeln und zu analysieren.
-
-### Alerts und Benachrichtigungen
-- Warnungen einrichten, um benachrichtigt zu werden, wenn bestimmte Schwellenwerte überschritten werden.
-- E-Mail und SMS-Benachrichtigungen, damit man direkt benachrichtigt wird.
-- Automatische Skalierung basierend auf Metriken einrichten, damit die Verfügbarkeit gewährleistet wird.
-
-### Hochverfügbarkeit und Ausfallsicherheit
-- AKS-Knoten über mehrere Regionen bereitstellen. Dadurch wird die Anwendung bei einem Ausfall einer Region weiterhin verfügbar sein.
-
-### Regelmäßige Backups und Disaster Recovery
-- Automatisierte regelmäßige Backups der Daten und Konfigurationen.
-- Disaster Recovery Pläne erstellen für die Wiederherstellung nach einem Ausfall. Dadurch kann die Anwendung schnell wiederhergestellt werden.
-
-### Sicherheit und Compliance
-- Sicherheitsrichtlinien und -kontrollen Implementiere, um die AKS-Lösung zu schützen.
-- Compliance-Überwachung sicherstellen. Dadurch wird die Umgebung auf die Einhaltung gesetzlicher Vorschriften und Industriestandards überwacht.
-
-### Kontinuierliche Optimierung und Wartung
-- Leistungsüberwachung: Überwache die Leistung deiner AKS-Lösung kontinuierlich und optimiere sie bei Bedarf.
-- Regelmäßige Wartungsarbeiten durchführen, damit die Umgebung auf dem neuesten Stand und sicher bleibt.
+- Für AKS-Cluster ein **Dashboard** erstellen, damit man Echtzeitdaten wie CPU-Auslastung, Speicherverbrauch und Netzwerkaktivität im Blick hat.
+- **Log Analytics** nutzen, um Anwendungsprotokolle und Audit-Logs zu sammeln und zu analysieren.
+- **Warnungen per E-Mail und SMS-Benachrichtigungen** konfigurieren. Dadurch wird man benachrichtigt, wenn bestimmte Schwellenwerte überschritten werden.
+- Basierend auf Metriken **automatische Skalierung** einrichten, damit die Verfügbarkeit gewährleistet wird.
+- **AKS-Knoten über mehrere Regionen** bereitstellen. Dadurch wird die Anwendung bei einem Ausfall einer Region weiterhin verfügbar sein.
+- Automatisierte **regelmäßige Backups** der Daten und Konfigurationen.
+- **Disaster Recovery Pläne** erstellen für die Wiederherstellung nach einem Ausfall. Dadurch kann die Anwendung schnell wiederhergestellt werden.
+- **Sicherheitsrichtlinien und -kontrollen** implementieren, damit die AKS-Lösung geschützt wird.
+- **Compliance-Überwachung** sicherstellen. Dadurch wird die Umgebung auf die Einhaltung gesetzlicher Vorschriften und Industriestandards überwacht.
+- **Regelmäßige Wartungsarbeiten** tragen dazu bei, dass die Umgebung auf dem neuesten Stand und sicher bleibt.
 
 ## ▶ Task 7
 Teilweise angefangen: Deployment des Task 1 erfolgt automatisiert über GitHub Actions
