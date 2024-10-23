@@ -7,7 +7,8 @@ resource "azurerm_resource_group" "rg" {
   location = var.resource_group_location
   name     = random_pet.rg_name.id
   tags = {
-    author = "Julian"
+    author = "Julian" # Required by Azure Policy
+    purpose = "Coding Challenge" # Required by Azure Policy
   }
 }
 
