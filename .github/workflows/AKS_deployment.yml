@@ -53,17 +53,17 @@ jobs:
       - name: Terraform Output
         run: terraform output
 
-      - name: Sleep for resources to be ready
-        run: sleep 120
-        
-      - name: Configure kubectl
-        run: |
-          az aks get-credentials --resource-group $(terraform output -raw resource_group_name) --name $(terraform output -raw kubernetes_cluster_name)
-          kubectl config use-context $(terraform output -raw kubernetes_cluster_name)
-        
-      - name: Configure kubectl
-        run: |
-          kubectl apply -f configmap.yaml
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
-          kubectl get nodes
+#      - name: Sleep for resources to be ready
+#       run: sleep 120
+#        
+#      - name: Configure kubectl
+#        run: |
+#          az aks get-credentials --resource-group $(terraform output -raw resource_group_name) --name $(terraform output -raw kubernetes_cluster_name)
+#          kubectl config use-context $(terraform output -raw kubernetes_cluster_name)
+#        
+#      - name: Configure kubectl
+#        run: |
+#          kubectl apply -f configmap.yaml
+#          kubectl apply -f deployment.yaml
+#          kubectl apply -f service.yaml
+#          kubectl get nodes
