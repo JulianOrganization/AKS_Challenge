@@ -55,7 +55,7 @@ jobs:
         
       - name: Configure kubectl
         run: |
-          az aks get-credentials --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name myAKSCluster
+          az aks get-credentials --resource-group $(terraform output -raw azurerm_resource_group_name) --name $(terraform output -raw azurerm_kubernetes_cluster_name)
           kubectl apply -f configmap.yaml
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
