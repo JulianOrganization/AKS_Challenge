@@ -1,3 +1,4 @@
+# Enthält die Webseite mit der Ausgabe "Hello World" an sich, die der NGINX-Webserver anzeigt.
 apiVersion: v1
 kind: ConfigMap
 metadata:
