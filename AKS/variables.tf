@@ -1,29 +1,29 @@
 variable "resource_group_location" {
   type        = string
-  default     = "northeurope"
-  description = "Location of the resource group."
+  default     = "northeurope" # Location der Ressourcen festlegen.
+  description = "Standort der Resource Gruppe."
 }
 
 variable "resource_group_name_prefix" {
   type        = string
   default     = "rg"
-  description = "Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription."
+  description = "Präfix des Ressourcengruppennamens, der mit einer zufälligen ID kombiniert wird, damit der Name im Azure-Abonnement eindeutig ist."
 }
 
 variable "node_count" {
   type        = number
-  description = "The initial quantity of nodes for the node pool."
-  default     = 2
+  description = "Die initiale Anzahl von Knoten für den Knotenpool."
+  default     = 2 # Anzahl an Knoten.
 }
 
 variable "msi_id" {
   type        = string
-  description = "The Managed Service Identity ID. Set this value if you're running this example using Managed Identity as the authentication method."
+  description = "Die Managed Service-Identitäts-ID. Wert festlegen, wenn dieses Programm mit Managed Identity als Authentifizierungsmethode ausgeführt wird."
   default     = null
 }
 
 variable "username" {
   type        = string
-  description = "The admin username for the new cluster."
+  description = "Der Administrator-Benutzername für den neuen Cluster."
   default     = "azureadmin"
 }
