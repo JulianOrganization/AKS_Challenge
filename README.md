@@ -2,13 +2,14 @@
 
 ## Task 1: 
 https://github.com/JulianOrganization/AKS_Challenge/actions/runs/11482897829/job/31957062717
+```
+az aks get-credentials --resource-group rg-knowing-monkey --name cluster-touched-gorilla
 
-```az aks get-credentials --resource-group rg-knowing-monkey --name cluster-touched-gorilla```
-
-```kubectl get nodes```
-
+kubectl get nodes
+```
 ## Task 2: 
 ### confimap.yaml erstellen:
+```
 echo '
 apiVersion: v1
 kind: ConfigMap
@@ -26,8 +27,10 @@ data:
     </body>
     </html>
 ' > configmap.yaml
+```
 
 ### deployment.yaml erstellen:
+```
 echo '
 apiVersion: apps/v1
 kind: Deployment
@@ -56,8 +59,10 @@ spec:
         configMap:
           name: html-config
 ' > deployment.yaml
+```
 
 ### service.yaml erstellen:
+```
 echo '
 apiVersion: v1
 kind: Service
@@ -71,15 +76,20 @@ spec:
   selector:
     app: hello-world
 ' > service.yaml
+```
 
 ### Cloud Shell Commands ausführen:
+```
 kubectl apply -f configmap.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
 kubectl get service hello-world-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+```
 
 ### Ergebnis:
-Cloud Shell spuckt aus: 4.209.76.52 
+```
+4.209.76.52
+```
 
 ## Task3:
