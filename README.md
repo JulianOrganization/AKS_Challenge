@@ -87,13 +87,11 @@ Anwenden der YAML-Dateien und Abruf der IP-Adresse.
 kubectl apply -f configmap.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
-
-kubectl get service hello-world-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
 ### Ergebnis:
 ```
-4.209.76.52
+kubectl get svc hello-world-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
 ## Task3:
@@ -159,4 +157,75 @@ kubectl apply -f hpa.yaml
 hpa.yaml verifizieren:
 ```
 kubectl get hpa
+```
+
+## Task 4
+Installation des Ingress-Controller (NGINX) mit Helm in der Cloud Shell:
+```
+# Hinzufügen des Helm-Repositories
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+# Installation des Ingress-Controllers
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+  --create-namespace --namespace ingress-nginx
+```
+
+Erstellung des Selbstsigniertes Zertifikat:
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=IP_ADDRESS" # IP-Adresse eingefügt
+kubectl create secret tls tls-secret --key tls.key --cert tls.crt
+```
+
+Öffentliche IP-Adresse des LoadBalancer-Service rausfinden:
+```
+kubectl get svc hello-world-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+```
+
+IP-Adresse einfügen im folgenden Befehl und ausführen:
+```
+az network public-ip list --query "[?ipAddress=='IP_ADDRESS'].[name,id]" --output table
+```
+Aus der Tabelle vom Schritt davor die PUBLIC_IP_RESOURCE_ID eintragen:
+```
+az network public-ip update --ids PUBLIC_IP_RESOURCE_ID --dns-name helloworlddns
+```
+
+ingress.yaml erstellen in der Cloud Shell:
+```
+echo '
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-world-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - hosts:
+    - helloworlddns.northeurope.cloudapp.azure.com
+    secretName: tls-secret
+  rules:
+  - host: helloworlddns.northeurope.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hello-world-service
+            port:
+              number: 80
+' > ingress-tls.yaml
+```
+
+ingress.yaml anwenden:
+```
+kubectl apply -f ingress-tls.yaml
+```
+
+Ingress-Ressource überprüfen:
+```
+kubectl get ingress
 ```
