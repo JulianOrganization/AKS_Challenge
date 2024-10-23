@@ -1,7 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
 # Random resource group name will be created
 resource "random_pet" "rg_name" {
   prefix = var.resource_group_name_prefix
