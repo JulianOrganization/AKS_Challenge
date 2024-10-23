@@ -9,6 +9,7 @@ kubectl get nodes
 ```
 ## Task 2: 
 ### confimap.yaml erstellen:
+Enthält die Webseite mit der Ausgabe "Hello World" an sich, die der NGINX-Webserver anzeigt.
 ```
 echo '
 apiVersion: v1
@@ -30,6 +31,7 @@ data:
 ```
 
 ### deployment.yaml erstellen:
+Diese Datei legt fest, wie der Webserver bereitgestellt wird und die Verwendung der ConfigMap für den Inhalt.
 ```
 echo '
 apiVersion: apps/v1
@@ -62,6 +64,7 @@ spec:
 ```
 
 ### service.yaml erstellen:
+Macht den Webserver über eine externe IP-Adresse zugänglich, sodass "Hello World" im Browser angezeigt wird.
 ```
 echo '
 apiVersion: v1
@@ -79,6 +82,7 @@ spec:
 ```
 
 ### Cloud Shell Commands ausführen:
+Anwenden der YAML-Dateien und Abruf der IP-Adresse.
 ```
 kubectl apply -f configmap.yaml
 kubectl apply -f deployment.yaml
