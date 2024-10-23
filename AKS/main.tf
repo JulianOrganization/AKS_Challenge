@@ -1,17 +1,19 @@
-# Random resource group name will be created
+# Zufällige Resource Group Namen Generierung
 resource "random_pet" "rg_name" {
   prefix = var.resource_group_name_prefix
 }
 
+# Resource Group Definition
 resource "azurerm_resource_group" "rg" {
   location = var.resource_group_location
   name     = random_pet.rg_name.id
   tags = {
-    author = "Julian" # Required by Azure Policy
-    purpose = "Coding Challenge" # Required by Azure Policy
+    author = "Julian" # Von Azure Policy benötigt
+    purpose = "Coding Challenge" # Von Azure Policy benötigt
   }
 }
 
+# Zufällige Kubernetes Cluster Namen und DNS-Präfix Generierung
 resource "random_pet" "azurerm_kubernetes_cluster_name" {
   prefix = "cluster"
 }
@@ -20,6 +22,7 @@ resource "random_pet" "azurerm_kubernetes_cluster_dns_prefix" {
   prefix = "dns"
 }
 
+# Kubernetes Cluster Definition
 resource "azurerm_kubernetes_cluster" "k8s" {
   location            = azurerm_resource_group.rg.location
   name                = random_pet.azurerm_kubernetes_cluster_name.id
@@ -32,16 +35,18 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
   default_node_pool {
     name       = "agentpool"
-    vm_size    = "Standard_D2s_v5"
+    vm_size    = "Standard_D2s_v5" # Für die Erstellung des AKS in Northeurope benötigt.
     node_count = var.node_count
   }
 
+# Konfiguriert das Netzwerkprofil des Clusters.
   network_profile {
     network_plugin    = "kubenet"
     load_balancer_sku = "standard"
   }
 }
 
+# Code, welcher benötigt wird, um Task 2 zu automatisieren.
 /*resource "azurerm_kubernetes_cluster_node_pool" "np" {
   name                = "internal"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s.id
