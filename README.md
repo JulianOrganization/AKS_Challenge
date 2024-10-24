@@ -104,7 +104,7 @@ kubectl get svc hello-world-service -o jsonpath='{.status.loadBalancer.ingress[0
 ```
 ℹ Teilweise wurde dieser Task schon automatisiert: https://github.com/JulianOrganization/AKS_Challenge/blob/main/.github/workflows/AKS_deployment.yml#L56
 
-## ▶ Task3:
+## ▶ Task 3:
 ### Bereitstellung unter mehreren Knoten:
 In Cluster gehen, Workloads, Create, YAML Datei, Code einfügen:
 ```
@@ -240,7 +240,52 @@ Ingress-Ressource überprüfen:
 kubectl get ingress
 ```
 
-Für das Aufrufen der Webseite über https fehlen mir noch Berechtigungen als Key Vault User um die Zertifikate in der Key Vault speichern zu können. 😮
+Verwendung von TLS und gültiges HTTPS-Zertifikat:
+- Über SSLFORFREE.com ein kostenloses Zertifikat (Key und das Zertifikat) ausstellen lassen.
+- Berechtigungen angefragt (Key Vault Adminitrator).
+- In Azure Key Vault ein Certificate (fullchain.pem) hinterlegt, welches den Key und das Zertifikat enthält.
+- Ausführen in der Cloud Shell:
+```
+kubectl create secret tls tls-secret --cert=fullchain.pem --key=fullchain.pem
+```
+- ingress.yaml anpassen:
+```
+echo '
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.2, TLSv1.3"
+spec:
+  tls:
+  - hosts:
+    - helloworlddns.northeurope.cloudapp.azure.com
+    secretName: tls-secret
+  rules:
+  - host: helloworlddns.northeurope.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-service
+            port:
+              number: 443
+' > ingress.yaml
+```
+- ingress.yaml anwenden:
+```
+kubectl apply -f ingress.yaml
+```
+- Ingress-Ressource testen:
+```
+kubectl get ingress my-ingress
+```
+- Erfolgreicher Zugriff über HTTPS
+
 
 ## ▶ Task 5
 ### Möglichkeiten, um das sicherzustellen:
