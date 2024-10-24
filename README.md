@@ -7,7 +7,7 @@
 - Federated credential für den Service Principal einrichten für GitHub Actions
 - Contributor Rolle für die Subscription
 - Key Vault User für die Key Vault
-- Dokumente und Videos über Kuberenetes bzw. AKS studieren (https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-terraform?pivots=development-environment-azure-cli)
+- https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-terraform?pivots=development-environment-azure-cli
 
 ## ▶ Task 1: 
 https://github.com/JulianOrganization/AKS_Challenge/actions/runs/11482897829/job/31957062717
@@ -132,7 +132,7 @@ Damit stellt AKS automatisch sicher, dass eine hohe Verfügbarkeit und Ausfallsi
 
 Link:
 ```
-https://portal.azure.com/#view/Microsoft_Azure_ContainerService/AksK8ResourceMenuBlade/~/overview-Deployment/aksClusterId/%2Fsubscriptions%2F2fc0173e-cada-4000-82db-566c79d396db%2FresourceGroups%2Frg-knowing-monkey%2Fproviders%2FMicrosoft.ContainerService%2FmanagedClusters%2Fcluster-touched-gorilla/resource~/%7B%22kind%22%3A%22Deployment%22%2C%22metadata%22%3A%7B%22name%22%3A%22nginx-deployment%22%2C%22namespace%22%3A%22default%22%2C%22uid%22%3A%22921187a1-a63c-4f33-90dc-7ccfe61e5aef%22%7D%2C%22spec%22%3A%7B%22selector%22%3A%7B%22matchLabels%22%3A%7B%22app%22%3A%22nginx%22%7D%7D%7D%7D
+nginx-deployment unter Azure
 ```
 
 ### Instanzen sollen eine Round-Robin-Verteilung des Datenverkehrs erhalten
@@ -292,9 +292,11 @@ Erfolgreicher Zugriff über HTTPS
 NSG eingerichtet:
 - Netzwerksicherheitsgruppen (NSGs) sind eine Sammlung von Sicherheitsregeln, die den Netzwerkzugriff auf Ressourcen in einem virtuellen Netzwerk (VNet) steuern.
 - Jede Regel gibt an, ob der Datenverkehr zugelassen oder abgelehnt wird, basierend auf der Quelle, dem Ziel, dem Protokoll und dem Port.
-https://portal.azure.com/#@cgicndp.onmicrosoft.com/resource/subscriptions/2fc0173e-cada-4000-82db-566c79d396db/resourceGroups/mc_rg-knowing-monkey_cluster-touched-gorilla_northeurope/providers/Microsoft.Network/networkSecurityGroups/aks-agentpool-39048137-nsg/overview
-### Weitere Möglichkeiten, um das sicherzustellen:
-- **TLS/SSL Zertifikate** stellen sicher, dass der Datenverkehr über HTTPS läuft.
+```
+aks-agentpool-39048137-nsg in Azure
+```
+
+### Weitere Möglichkeiten, um das sicherzustellen:- **TLS/SSL Zertifikate** stellen sicher, dass der Datenverkehr über HTTPS läuft.
 - **Firewall-Regeln** lassen nur autorisierten Datenverkehr zu.
 - **Azure Security Center** verwenden, um die kontinuierliche Sicherheitsbewertungen und Empfehlungen einsehen zu können.
 - **Azure Policies** einsetzen, damit Sicherheitsrichtlinien automatisch durchgesetzt werden.
