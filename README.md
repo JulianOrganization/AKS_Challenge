@@ -288,9 +288,12 @@ Erfolgreicher Zugriff über HTTPS
 
 
 ## ▶ Task 5
-### Möglichkeiten, um das sicherzustellen:
+NSG eingerichtet:
+- Netzwerksicherheitsgruppen (NSGs) sind eine Sammlung von Sicherheitsregeln, die den Netzwerkzugriff auf Ressourcen in einem virtuellen Netzwerk (VNet) steuern.
+- Jede Regel gibt an, ob der Datenverkehr zugelassen oder abgelehnt wird, basierend auf der Quelle, dem Ziel, dem Protokoll und dem Port.
+https://portal.azure.com/#@cgicndp.onmicrosoft.com/resource/subscriptions/2fc0173e-cada-4000-82db-566c79d396db/resourceGroups/mc_rg-knowing-monkey_cluster-touched-gorilla_northeurope/providers/Microsoft.Network/networkSecurityGroups/aks-agentpool-39048137-nsg/overview
+### Weitere Möglichkeiten, um das sicherzustellen:
 - **TLS/SSL Zertifikate** stellen sicher, dass der Datenverkehr über HTTPS läuft.
-- **Netzwerksicherheitsgruppen (NSGs)** tragen dazu bei den Zugriff auf die Ressourcen zu kontrollieren.
 - **Firewall-Regeln** lassen nur autorisierten Datenverkehr zu.
 - **Azure Security Center** verwenden, um die kontinuierliche Sicherheitsbewertungen und Empfehlungen einsehen zu können.
 - **Azure Policies** einsetzen, damit Sicherheitsrichtlinien automatisch durchgesetzt werden.
