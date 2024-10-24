@@ -248,7 +248,7 @@ Verwendung von TLS und gültiges HTTPS-Zertifikat:
 ```
 kubectl create secret tls tls-secret --cert=fullchain.pem --key=fullchain.pem
 ```
-- ingress.yaml anpassen:
+ingress.yaml anpassen:
 ```
 echo '
 apiVersion: networking.k8s.io/v1
@@ -276,15 +276,15 @@ spec:
               number: 443
 ' > ingress.yaml
 ```
-- ingress.yaml anwenden:
+ingress.yaml anwenden:
 ```
 kubectl apply -f ingress.yaml
 ```
-- Ingress-Ressource testen:
+Ingress-Ressource testen:
 ```
 kubectl get ingress my-ingress
 ```
-- Erfolgreicher Zugriff über HTTPS
+Erfolgreicher Zugriff über HTTPS
 
 
 ## ▶ Task 5
