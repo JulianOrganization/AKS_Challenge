@@ -137,7 +137,7 @@ https://portal.azure.com/#view/Microsoft_Azure_ContainerService/AksK8ResourceMen
 
 ### Instanzen sollen eine Round-Robin-Verteilung des Datenverkehrs erhalten
 Dies wurde bereits in der service.yaml Datei sichergestell, welche einen LoadBalancer verwendet.
-Dadurch wird der Datenverkehr autoamtisch im Round-Robin-Verfahren auf die verfügbaren Replikas verteilt.
+Dadurch wird der Datenverkehr autoamtisch im Round-Robin-Verfahren auf die verfügbaren Replikate verteilt.
 
 ### Container-Instanzen sollen je nach CPU-Last automatisch skalieren
 Cloud-Shell öffnen, hpa.yaml Datei erstellen:
@@ -152,7 +152,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: nginx-deployment
-  minReplicas: 1 # Mindestens 1 Repikat
+  minReplicas: 1 # Mindestens 1 Replikat
   maxReplicas: 10 # Maximal 10 Replikate
   targetCPUUtilizationPercentage: 50
 ' > hpa.yaml
@@ -248,6 +248,7 @@ Verwendung von TLS und gültiges HTTPS-Zertifikat:
 ```
 kubectl create secret tls tls-secret --cert=fullchain.pem --key=fullchain.pem
 ```
+Folgende Konfiguration ist noch fehlerhaft:
 ingress.yaml anpassen:
 ```
 echo '
